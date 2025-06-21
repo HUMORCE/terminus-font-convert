@@ -56,12 +56,9 @@ def main():
             ))
 
         print(f'输出字体：{file_path.stem}')
-        builder.save_otf(outputs_dir.joinpath(f'{file_path.stem}.otf'))
-        builder.save_otf(outputs_dir.joinpath(f'{file_path.stem}.otf.woff'), flavor=opentype.Flavor.WOFF)
-        builder.save_otf(outputs_dir.joinpath(f'{file_path.stem}.otf.woff2'), flavor=opentype.Flavor.WOFF2)
-        builder.save_ttf(outputs_dir.joinpath(f'{file_path.stem}.ttf'))
-        builder.save_ttf(outputs_dir.joinpath(f'{file_path.stem}.ttf.woff'), flavor=opentype.Flavor.WOFF)
-        builder.save_ttf(outputs_dir.joinpath(f'{file_path.stem}.ttf.woff2'), flavor=opentype.Flavor.WOFF2)
+        ttf_builder = builder.to_ttf_builder()
+        ttf_builder.font['post'].isFixedPitch = 1
+        ttf_builder.save(outputs_dir.joinpath(f'{file_path.stem}.ttf'))
 
 
 if __name__ == '__main__':
